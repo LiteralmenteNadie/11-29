@@ -14,7 +14,7 @@ const service = {
         let prods = await Products.findAll({
             include: ["Category"]
         });
-        console.log(prods);
+        // console.log(prods);
         return prods;
     }, // R
     findById: async (id) => {
@@ -32,6 +32,26 @@ const service = {
             price: data.price,
             category_id: data.category
         };
+
+        let resultado = Products.update(newData, {
+            where: {
+                id: id
+            }
+        });
+
+        return resultado;
+    },
+    uploadImage: async (id, data) => {
+        let newData = {
+            image: data.image
+        };
+
+        // newData.images.forEach((image) => {
+        //     Image.create({
+        //         name: image.filename,
+        //         product_id: id
+        //     })
+        // })
 
         let resultado = Products.update(newData, {
             where: {

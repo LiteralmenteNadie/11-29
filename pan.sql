@@ -11,6 +11,7 @@ CREATE TABLE products (
     category_id INT UNSIGNED NOT NULL,
     price INT UNSIGNED NOT NULL,
     description VARCHAR(255) NOT NULL,
+    image VARCHAR(255) NOT NULL,
     -- CONSTRAINT
     -- RESERVADA (columna) REFERENCES tabla(clave_primaria)
     FOREIGN KEY (category_id) REFERENCES categories(id)

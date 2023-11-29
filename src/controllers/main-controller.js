@@ -38,6 +38,20 @@ const controller = {
             res.send("Algo malio sal");
         };
     },
+    productUploadImage: async (req, res) => {
+        // req.file
+        // console.log(req.file);
+        const id = req.params.id;
+        let newData = {
+            image: req.file.filename
+        }
+        let resultado = await Products.uploadImage(id, newData);
+        if (resultado > 0) {
+            res.send("Edición exitosa");
+        } else {
+            res.send("Algo malio sal");
+        };
+    },
     // Delete
     productDelete: async (req, res) => {
         const id = req.params.id;
