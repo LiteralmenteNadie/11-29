@@ -177,7 +177,42 @@ async function cargarProductos(){
     return products;
 }
 
+function cargarMensajes(mensajes) {
+    let chatBox = document.querySelector("ul#chat-box");
+    chatBox.innerHTML = "";
+    mensajes.forEach((mensaje) => {
+        chatBox.innerHTML += `<li>${mensaje.nombre}: ${mensaje.mensaje}</li>`
+    })
+}
+
 window.addEventListener("load", async()=>{
+    let socket = io();
+
+    socket.emit("asdasd", "Holi")
+
+    socket.on("connected-total", (conectados) =>{
+        // console.log(conectados);
+    })
+
+    socket.on("mensajes", (mensajes)=> {
+        cargarMensajes(mensajes);
+    })
+    let inputName = document.querySelector("input#chat-name");
+    let inputMessage = document.querySelector("input#chat-msg");
+    let sendButton = document.querySelector("button#send-msg");
+    
+
+    sendButton.addEventListener("click", () => {
+        if (inputName.value.length > 0 && inputMessage.value.length > 0) {
+            inputName.disabled = true;
+            socket.emit("nuevo-mensaje",{
+                nombre: inputName.value,
+                mensaje: inputMessage.value
+            })
+            inputMessage.value = "";
+        }
+    })
+
     let dataSacadaDeLaCookie = getCookie("theme")      
     let body = document.body;
     body.classList.add(dataSacadaDeLaCookie || "asd");

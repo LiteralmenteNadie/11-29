@@ -6,3 +6,7 @@ body.dark {
     background-color: darkred;
     color: snow;
 }
+
+ul#products img {
+    width: 150px;
+}
